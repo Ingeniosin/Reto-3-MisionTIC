@@ -36,7 +36,7 @@ def registro():
 
 @app.route('/miinformacion', methods=["GET","POST"])
 def MiInformacion():
-    return render_template("MiInformaciona.html")
+    return render_template("MiInformacion.html")
 
 @app.route('/dashboard')
 def Dashboard():

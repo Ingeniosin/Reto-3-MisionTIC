@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu vuelo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"  crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{url_for('static' , filename='img/LogoBlanco.png')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static' , filename='css/sb-admin-2.css')}}">
+    <link rel="stylesheet" href="{{url_for('static' , filename='css/Main.css')}}">
+    <link rel="stylesheet" href="{{url_for('static' , filename='css/Layout.css')}}">
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="shadow d-flex px-2 flex-row align-items-center justify-content-between">
+
+            <div class="d-flex flex-row">
+                <img src="{{url_for('static' , filename='img/Logo.png')}}" class="img-fluid|thumbnail rounded-top|rounded-end|rounded-bottom|rounded-start|rounded-circle| logo" alt="Logo">
+                <div class="topbar-divider d-none d-sm-block divisorLogo"></div>
+            </div>
+            
+            <div class="d-flex flex-row">
+                <div class="topbar-divider d-none d-sm-block divisorLeft"></div>
+                <div class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 text-gray-600 small">Nombre</span>
+                    <img class="img-profile rounded-circle" src="{{url_for('static' , filename='img/user.png')}}" style="width: 40px;">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#"> <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Perfil</a>
+                    <a class="dropdown-item" href="#"><i  class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>Configuracion</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>Mis vuelos</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar sesíon</a>
+                </div>
+                </div>
+            </div>
+            
+        </header>
+        <div class="contenedor-anidado">
+            <menu class="shadow "> 
+                <div class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="far fa-calendar"></i>
+                        <span> Mi Calendario</span></a>
+                </div>
+
+                <div class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-info-circle"></i>
+                        <span> Informacion de vuelos</span></a>
+                </div>
+
+                <div class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-fighter-jet"></i>
+                        <span> Acceder a vuelo</span></a>
+                </div>
+
+                <div class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-cogs"></i>
+                        <span> Mi informacion</span></a>
+                </div>
+
+            </menu>
+            <div class="contenido w-100 h-100">
+                contenido
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    //@ts-check
+    //Menu lateral
+    var menu = document.querySelector('menu');
+    menu.addEventListener('dblclick', function (e) {
+        var isExpanded = !menu.classList.contains('hideMenu');
+        menu.classList.remove(!isExpanded ? 'hideMenu' : 'showMenu');
+        menu.classList.add(isExpanded ? 'hideMenu' : 'showMenu');
+    });
+</script>
+<style>
+    span, i {
+        color: black;
+        font-size: 15px;
+    }
+
+    nav-item:first-child {
+        padding-top: 20px;
+    }
+
+    .nav-item {
+        margin-bottom: 10px;
+    }
+
+</style>
+</html>

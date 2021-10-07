@@ -1,0 +1,25 @@
+.form-control-user {
+    font-size: 0.85rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: 15px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #b5c99a;
+    border-color: #b1e66d;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #b1e66d;
+    border-color: #628633;
+}
+
+.invalid-feedback {
+    margin: 0;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}

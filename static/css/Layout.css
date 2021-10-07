@@ -1,0 +1,102 @@
+/*Principal container*/
+body > div {
+  height: 100%;
+  position: fixed;
+  display: grid;
+  margin: 0 !important;
+  padding: 0 !important;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 70px 1fr;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  grid-column: 1/3;
+}
+
+.logo {
+  width: 80px;
+  margin-left: 65px;
+  margin-right: 45px;
+}
+
+.divisorLogo {
+  position: absolute;
+  left: 223px;
+  top: 15px;
+}
+
+.divisorLeft {
+  margin-left: -170px !important;
+  margin-right: 25px !important;
+}
+
+.contenedor-anidado {
+  display: flex;
+  flex-direction: row;
+  grid-column: 1/3;
+  height: 100%;
+}
+
+menu {
+  margin: 0;
+  padding: 20px 40px;
+  min-width: 240px;
+  padding-inline-start: 0 !important;
+}
+
+.topbar-divider {
+  width: 0;
+  border-right: 1px solid #e3e6f0;
+  height: calc(4.375rem - 2rem);
+  margin: auto 1rem;
+}
+
+
+/*Menu lateral y animacion*/
+
+.hideMenu {
+  transition: width 1s, min-width 1s, padding 1s;
+  min-width: 40px;
+  width: 40px;
+  padding: 0;
+}
+
+.hideMenu > * {
+  animation: hideMenu 0.8s ease normal forwards;
+}
+
+.showMenu {
+  transition: width 1s, min-width 1s, padding 1s;
+  width: 240px;
+  min-width: 240px;
+  padding: 20px 40px;
+}
+
+.showMenu > * {
+  animation: hideMenu 1s ease reverse forwards;
+}
+
+@keyframes hideMenu {
+  0% {
+      transform: translateX(0%); 
+      opacity: 1
+  }
+
+  99% {
+      opacity: 0;
+      z-index: 1;
+  }
+
+  100% {
+      opacity: 0;
+      display: none;
+      position: fixed;
+      z-index: -5;
+      transform: translateX(-200%); 
+  }
+}   

@@ -20,12 +20,10 @@
 <body>
     <div class="container-fluid">
         <header class="shadow d-flex px-2 flex-row align-items-center justify-content-between">
-
             <div class="d-flex flex-row">
                 <img src="{{url_for('static' , filename='img/Logo.png')}}" class="img-fluid|thumbnail rounded-top|rounded-end|rounded-bottom|rounded-start|rounded-circle| logo" alt="Logo">
                 <div class="topbar-divider d-none d-sm-block divisorLogo"></div>
-            </div>
-            
+            </div>            
             <div class="d-flex flex-row">
                 <div class="topbar-divider d-none d-sm-block divisorLeft"></div>
                 <div class="nav-item dropdown no-arrow">
@@ -41,8 +39,7 @@
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar sesíon</a>
                 </div>
                 </div>
-            </div>
-            
+            </div>            
         </header>
         <div class="contenedor-anidado">
             <menu class="shadow "> 
@@ -51,27 +48,23 @@
                         <i class="far fa-calendar"></i>
                         <span> Mi Calendario</span></a>
                 </div>
-
                 <div class="nav-item">
                     <a class="nav-link" href="">
                         <i class="fas fa-info-circle"></i>
                         <span> Informacion de vuelos</span></a>
                 </div>
-
                 <div class="nav-item">
                     <a class="nav-link" href="">
                         <i class="fas fa-fighter-jet"></i>
                         <span> Acceder a vuelo</span></a>
                 </div>
-
                 <div class="nav-item">
                     <a class="nav-link" href="">
                         <i class="fas fa-cogs"></i>
                         <span> Mi informacion</span></a>
                 </div>
-
             </menu>
-            <div class="contenido w-100 h-100">
+            <div class="contenido w-100 h-100" style="overflow-y: auto; overflow-x: auto; height: calc(100vh - 70px) !important;">
                 {%block contenido%}
                 {%endblock%}    
             </div>

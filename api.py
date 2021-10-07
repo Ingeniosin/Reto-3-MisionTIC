@@ -34,6 +34,10 @@ def registro():
     return render_template("Registro.html", form = form)
 
 
-@app.route('/MiInformacion', methods=["GET","POST"])
+@app.route('/miinformacion', methods=["GET","POST"])
 def MiInformacion():
     return render_template("MiInformacion.html")
+
+@app.route('/dashboard')
+def Dashboard():
+    return render_template("Dashboard.html")

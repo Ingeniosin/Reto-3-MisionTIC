@@ -20,7 +20,7 @@ def login():
     if isPost:
         isValid = form.validate_on_submit();
         if isValid:
-            return render_template("_Layout.html")
+            return redirect("/")
     return render_template("Login.html", form = form)
 
 @app.route('/auth/registro', methods=["GET","POST"])

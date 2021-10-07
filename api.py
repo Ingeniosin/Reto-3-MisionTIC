@@ -40,4 +40,4 @@ def MiInformacion():
 
 @app.route('/dashboard')
 def Dashboard():
-    return render_template("Dashboard.html")
+    return render_template("CAMBIO Dashboard.html")

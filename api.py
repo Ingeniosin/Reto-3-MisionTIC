@@ -32,3 +32,8 @@ def registro():
         if isValid:
             return redirect("login")
     return render_template("Registro.html", form = form)
+
+
+@app.route('/MiInformacion', methods=["GET","POST"])
+def MiInformacion():
+    return render_template("MiInformacion.html")

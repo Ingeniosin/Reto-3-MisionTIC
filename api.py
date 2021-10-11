@@ -23,6 +23,10 @@ def login():
             return redirect("/")
     return render_template("Login.html", form = form)
 
+@app.route('/auth/logout' , methods=["GET","POST"])
+def logout():
+    return redirect("/auth/login")
+
 @app.route('/auth/registro', methods=["GET","POST"])
 def registro():
     isPost = request.method=="POST";
@@ -42,3 +46,6 @@ def MiInformacion():
 def Dashboard():
     return render_template("Dashboard.html")
 
+@app.route('/gestionvuelos')
+def GestionVuelos():
+    return render_template("GestionDeVuelos.html")

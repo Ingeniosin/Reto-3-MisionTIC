@@ -9,6 +9,10 @@ body > div {
   grid-template-rows: 70px 1fr;
 }
 
+.modal-backdrop {
+  display: none;
+}
+
 div {
   margin: 0;
   padding: 0;

@@ -1,0 +1,61 @@
+h1 {
+    font-family: sans-serif;
+    text-align: center;
+    color: #377ba8;
+}
+
+form {
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: #ccc;
+}
+
+form input {
+    font-family: system-ui, sans-serif;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+button {
+    text-align: center;
+    font-weight: bold;
+}
+
+.size_label {
+    display: inline-flex;
+    text-align: center;
+}
+
+.card-img-top-b {
+    max-width: 80%;
+    max-height: 80%;
+    font-family: sasystem-ui, sans-serif;
+    ;
+}
+
+.card-width {
+    width: 18rem;
+    font-family: system-ui, sans-serif;
+    ;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+    border: none;
+}
+
+.card-body {
+    width: 50;
+    font-family: system-ui, sans-serif;
+    ;
+    height: 50;
+}
+
+.modal-body-a {
+    background-color: aqua;
+}
+
+.form_desplegable {
+    background-color: white;
+}

@@ -1,0 +1,285 @@
+{% extends "_Layout.html"%}
+{%block contenido%}
+<div class="p-5">
+    <h1> AEROPUERTO PALONEGRO INTERNACIONAL</h1>
+    <h2> PLATAFORMA DE GESTIÓN DE VUELOS </h2>
+    <p><strong>Señor Usuario:</strong> A continuación usted podra realizar la gestión de vuelos
+        que aterrizan o despegan
+        desde el Aeropuerto Palonegro Internacional, dentro de esta aplicación usted podrá: </p>
+    <Ol>
+        <li value="1">Crear Vuelos</li>
+        <li>Editar Vuelo</li>
+        <li>Eliminar vuelo</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-4" style="justify-content: center;">
+            <div class="card card-width">
+                <img src="{{url_for('static' , filename='img/GestionVuelos/adicion.png')}}" class="card-img-top-b" alt="Icono Vuelo">
+                <div class="card-body">
+                    <h5 class="card-title">Crear vuelo</h5>
+                    <button type="button" class="btn btn-primary" style="background-color: #3a51bf"
+                        data-toggle="modal" data-target="#BotonCrear"> Crear</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card card-width">
+                <img src="{{url_for('static' , filename='img/GestionVuelos/editar.png')}}" class="card-img-top-b" alt="Imagen avion">
+                <div class="card-body">
+                    <h5 class="card-title">Editar vuelo</h5>
+                    <button type="button" class="btn btn-primary" style="background-color: #3a51bf;"
+                        data-toggle="modal" data-target="#BotonModificar"> Editar </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card card-width">
+                <img src="{{url_for('static' , filename='img/GestionVuelos/eliminar.png')}}" class="card-img-top-b" alt="Imagen avion">
+                <div class="card-body">
+                    <h5 class="card-title">Eliminar vuelo</h5>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" style="background-color: #3a51bf;"
+                        data-toggle="modal" data-target="#BotonEliminar">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="BotonCrear" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <LEgend>Creación de Vuelos</LEgend>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="form_desplegable">
+                        <table border="0" style="width: 100%;">
+                            <tr>
+                                <td>
+                                    <div class="size_label">
+                                        <label for="Código">Código</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;" placeholder="ingrese un codigo"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label">
+                                        <label for="Origen">Origen</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Destino">Destino</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Fecha y hora de salida">Fecha y hora de
+                                            salida</label></div>
+                                </td>
+                                <td> <input type="datetime-local" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Fecha y hora de llegada">Fecha y hora de
+                                            llegada</label>
+                                </td>
+                                <td><input type="datetime-local" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Aerolinea">Aerolinea</label></div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Aeronave">Aeronave</label></div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Piloto">Piloto</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Copiloto">Copiloto</label></div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Comentarios">Comentarios</label></div>
+                                </td>
+                                <td><textarea name="Comentarios" style="width: 100%;">Escriba aqui su texto</textarea>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Crear vuelo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="BotonModificar" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <LEgend>Editar Vuelos</LEgend>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="form_desplegable">
+                        <table border="0" style="width: 100%;">
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Código">Código</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;" placeholder="ingrese un codigo"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Origen">Origen</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Destino">Destino</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Fecha y hora de salida">Fecha y hora de
+                                            salida</label></div>
+                                </td>
+                                <td> <input type="datetime-local" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Fecha y hora de llegada">Fecha y hora de
+                                            llegada</label>
+                                </td>
+                                <td><input type="datetime-local" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Aerolinea">Aerolinea</label></div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Aeronave">Aeronave</label></div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Piloto">Piloto</label>
+                                    </div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Copiloto">Copiloto</label></div>
+                                </td>
+                                <td><input type="text" style="width: 100%;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="size_label"><label for="Comentarios">Comentarios</label></div>
+                                </td>
+                                <td><textarea name="Comentarios" style="width: 100%;">Escriba aqui su texto</textarea>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Modificar vuelo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="BotonEliminar" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <LEgend>Eliminar Vuelos</LEgend>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="form_desplegable">
+                        <table border="0" style="width: 100%;">
+                            <tr>
+                                <td><input type="text" style="width: 100%;"
+                                        placeholder="ingrese el código de vuelo a eliminar">
+                                    <div class="size_label"></div>
+                                </td>
+                                <td><label for="Código">Buscar Vuelo</label>
+                </div>
+                </td>
+                </tr>
+
+                </table>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Eliminar vuelo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<link rel="stylesheet" href="{{url_for('static' , filename='css/GestionVuelos/Estilos.css')}}">
+{%endblock%}

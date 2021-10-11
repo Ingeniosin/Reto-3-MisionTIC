@@ -4,10 +4,9 @@
 
 {%block contenido%}
 <div id="wrapper">
-    <div id="content-wrapper" class="d-flex flex-column" >
+    <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
             <div class="container-fluid">
-                <h1 class="h3 mb-2 text-gray-800">Nuestros mejores destinos</h1>
                 <div class="row">
                     <div class="col-xl-8 col-lg-7">
                         <div class="card shadow mb-4">
@@ -19,54 +18,40 @@
                                     <canvas id="myAreaChart"></canvas>
                                 </div>
                                 <hr>
+
                             </div>
                         </div>
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Satisfaccion de usuarios</h6>
                             </div>
                             <div class="card-body">
                                 <div class="chart-bar">
                                     <canvas id="myBarChart"></canvas>
                                 </div>
                                 <hr>
-                                Styling for the bar chart can be found in the
-                                <code>/js/demo/chart-bar-demo.js</code> file.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
+
+
+
+
     </div>
+
+
 </div>
+
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-<script type="text/JavaScript" src="{{url_for('static' , filename='vendor/jquery/jquery.min.js')}}"></script>
-<script type="text/JavaScript"src="{{url_for('static' , filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script type="text/JavaScript" src="{{url_for('static' , filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-<script type="text/JavaScript" src="{{url_for('static' , filename='js/sb-admin-2.min.js')}}"></script>
+
 <script type="text/JavaScript" src="{{url_for('static' , filename='vendor/chart.js/Chart.min.js')}}"></script>
-<script type="text/JavaScript" src="{{url_for('static' , filename='js/demo/chart-area-demo.js')}}"></script>
-<script type="text/JavaScript" src="{{url_for('static' , filename='js/demo/chart-pie-demo.js')}}"></script>
-<script type="text/JavaScript" src="{{url_for('static' , filename='js/demo/chart-bar-demo.js')}}"></script>
+<script type="text/JavaScript" src="{{url_for('static' , filename='js/js.js')}}"></script>
+<script type="text/JavaScript" src="{{url_for('static' , filename='js/js1.js')}}"></script>
 {%endblock%}

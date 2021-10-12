@@ -1,4 +1,118 @@
 {% extends "_Layout.html"%}
+
+
+
 {%block contenido%}
-    Prueba
+<div id="wrapper">
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Mis vuelos</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="modal-body">
+                                    <form action="" class="form_desplegable">
+                                        <table border="0" style="width: 100%;">
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Código">Código</label>
+                                                    </div>
+                                                </td>
+                                                <td><input type="text" style="width: 100%;"
+                                                        placeholder="Por favor coloque su codigo aqui"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Origen">Origen</label>
+                                                    </div>
+                                                </td>
+                                                <td><input type="text" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Destino">Destino</label>
+                                                    </div>
+                                                </td>
+                                                <td><input type="text" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Fecha y hora de salida">Fecha y
+                                                            hora de
+                                                            salida</label></div>
+                                                </td>
+                                                <td> <input type="datetime-local" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Fecha y hora de llegada">Fecha y
+                                                            hora de
+                                                            llegada</label>
+                                                </td>
+                                                <td><input type="datetime-local" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Aerolinea">Aerolinea</label>
+                                                    </div>
+                                                </td>
+                                                <td><input type="text" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Aeronave">Aeronave</label></div>
+                                                </td>
+                                                <td><input type="text" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Piloto">Piloto</label>
+                                                    </div>
+                                                </td>
+                                                <td><input type="text" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Copiloto">Copiloto</label></div>
+                                                </td>
+                                                <td><input type="text" style="width: 100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="size_label"><label for="Comentarios">Comentarios</label>
+                                                    </div>
+                                                </td>
+                                                <td><textarea name="Comentarios"
+                                                        style="width: 100%;">Su opinion es importante para nosotros</textarea>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<script type="text/JavaScript" src="{{url_for('static' , filename='vendor/chart.js/Chart.min.js')}}"></script>
+<script type="text/JavaScript" src="{{url_for('static' , filename='js/js.js')}}"></script>
+<script type="text/JavaScript" src="{{url_for('static' , filename='js/js1.js')}}"></script>
 {%endblock%}

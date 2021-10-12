@@ -1,51 +1,76 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from werkzeug.utils import redirect
-from entity.UserCredential import UserCredential
-from entity.UserRegister import UserRegister
+from src.model.input.IUserCredential import IUserCredential
+from src.model.input.IUserRegister import IUserRegister
+
+from app import App as Application
 import os
 
-from entity.UserRegister import UserRegister
+Application()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
-@app.route('/')
-def home():
-    return render_template("_Layout.html")
 
-@app.route('/auth/login' , methods=["GET","POST"])
-def login():
-    isPost = request.method=="POST";
-    form = UserCredential(request.form if isPost else None) 
-    if isPost:
-        isValid = form.validate_on_submit();
-        if isValid:
-            return redirect("/")
-    return render_template("Login.html", form = form)
-
-@app.route('/auth/logout' , methods=["GET","POST"])
-def logout():
+@login_manager.unauthorized_handler
+def unauthorized():
     return redirect("/auth/login")
 
-@app.route('/auth/registro', methods=["GET","POST"])
-def registro():
-    isPost = request.method=="POST";
-    form = UserRegister(request.form if isPost else None) 
+@login_manager.user_loader
+def load_user(id):
+    from src.model.entity.User import User
+    return None if id == None else  User.get_by_id(id)
+
+
+@app.route('/auth/login', methods=["GET", "POST"])
+def login():
+    if current_user.is_authenticated:
+        return redirect("/")
+    isPost = request.method == "POST"
+    form = IUserCredential(request.form if isPost else None)
     if isPost:
-        isValid = form.validate_on_submit();
+        isValid = form.validate_on_submit()      
         if isValid:
+            login_user(form.user)
+            return redirect("/")
+    return render_template("Login.html", form=form)
+
+@app.route('/auth/registro', methods=["GET", "POST"])
+def registro():
+    if current_user.is_authenticated:
+        return redirect("/")
+    isPost = request.method == "POST"
+    form = IUserRegister(request.form if isPost else None)
+    if isPost:
+        isValid = form.validate_on_submit()
+        if isValid:
+            from src.model.entity.User import User
+            User.create(email = form.email.data, password = form.password.data, name = form.name.data).save()
             return redirect("login")
-    return render_template("Registro.html", form = form)
+    return render_template("Registro.html", form=form)
 
+@app.route('/auth/logout', methods=["GET", "POST"])
+@login_required
+def logout():
+    logout_user()
+    return redirect("/auth/login")
 
-@app.route('/miinformacion', methods=["GET","POST"])
+@app.route('/miinformacion', methods=["GET", "POST"])
+@login_required
 def MiInformacion():
     return render_template("MiInformacion.html")
 
+@app.route('/')
 @app.route('/dashboard')
+@login_required
 def Dashboard():
     return render_template("Dashboard.html")
 
+
 @app.route('/gestionvuelos')
+@login_required
 def GestionVuelos():
     return render_template("GestionDeVuelos.html")

@@ -60,6 +60,9 @@ menu {
   margin: auto 1rem;
 }
 
+.nav-item {
+  cursor: pointer;
+}
 
 /*Menu lateral y animacion*/
 

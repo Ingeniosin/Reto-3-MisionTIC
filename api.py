@@ -1,11 +1,13 @@
+import os
+
 from flask import Flask, render_template, request, session
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_login import (LoginManager, current_user, login_required,
+                         login_user, logout_user)
 from werkzeug.utils import redirect
-from src.model.input.IUserCredential import IUserCredential
-from src.model.input.IUserRegister import IUserRegister
 
 from app import App as Application
-import os
+from src.model.input.IUserCredential import IUserCredential
+from src.model.input.IUserRegister import IUserRegister
 
 Application()
 
@@ -74,3 +76,11 @@ def Dashboard():
 @login_required
 def GestionVuelos():
     return render_template("GestionDeVuelos.html")
+
+@app.route('/infopiloto')
+@login_required
+def InfoPiloto():
+    from src.model.entity.User import User
+    
+    return render_template("InformacionPiloto.html")
+

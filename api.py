@@ -84,3 +84,9 @@ def InfoPiloto():
     
     return render_template("InformacionPiloto.html")
 
+@app.route('/vervuelo')
+@login_required
+def vervuelo():
+    from src.model.entity.User import User
+    
+    return render_template("VerVuelo.html")

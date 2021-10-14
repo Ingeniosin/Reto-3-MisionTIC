@@ -8,11 +8,12 @@ from werkzeug.utils import redirect
 from app import App as Application
 from src.model.input.IUserCredential import IUserCredential
 from src.model.input.IUserRegister import IUserRegister
+from src.model.input.IFlight import IFlight
 
 Application()
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = 'asdasdasdasddsadssaasdsa'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -75,7 +76,11 @@ def Dashboard():
 @app.route('/gestionvuelos')
 @login_required
 def GestionVuelos():
-    return render_template("GestionDeVuelos.html")
+    isPost = request.method == "POST"
+    createForm = IFlight(listaLugares = [('1', 'cali'), ('2', 'pasto')], 
+        listaPiloto = [('1', 'juan'), ('2', 'andres')],
+        listaAvion = [('1', 'AB'), ('2', 'CD')])
+    return render_template("GestionDeVuelos.html", createForm = createForm)
 
 @app.route('/infopiloto')
 @login_required

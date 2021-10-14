@@ -70,7 +70,15 @@
                 </div>
                 <div class="modal-body">
                     <form action="" class="form_desplegable">
-                        <table border="0" style="width: 100%;">
+                        {{createForm.hidden_tag()}}
+                        {{createForm.origen(placeholder='Origen')}}
+                        {{createForm.destino(placeholder='Destino')}}
+                        {{createForm.fechaSalida(placeholder='fechaSalida')}}
+                        {{createForm.tiempoVuelo(placeholder='tiempoVuelo')}}
+                        {{createForm.piloto(placeholder='piloto')}}
+                        {{createForm.avion(placeholder='avion')}}
+
+                        <!-- <table border="0" style="width: 100%;">
                             <tr>
                                 <td>
                                     <div class="size_label">
@@ -140,7 +148,7 @@
                                 <td><textarea name="Comentarios" style="width: 100%;">Escriba aqui su texto</textarea>
                                 </td>
                             </tr>
-                        </table>
+                        </table> -->
 
                     </form>
 

@@ -10,5 +10,5 @@ class IUserRegister(FlaskForm):
 
     def validate_email(self, field):
         from src.model.entity.User import User
-        if not User.get_or_none(User.email == field.data) == None:
+        if User.select().where(User.email == field.data).exists():
             raise ValidationError("Este usuario ya esta registrado")

@@ -5,7 +5,6 @@ class App(object):
 
     def __init__(self):
         self.database = Database("MisionTicDb", "testAccount", "test4ccount", "juancamp.me", 5432)
-        print("database")
         self.database.open()
         self.createTables()
 

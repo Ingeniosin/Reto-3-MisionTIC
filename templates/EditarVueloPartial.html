@@ -1,0 +1,16 @@
+{% for field, errors in modifyInnerForm.errors.items() %}
+    <div class="alert alert-danger">{{ ', '.join(errors) }}</div>
+{% endfor %}
+
+<form action="../gestionvuelos/ms" method="post" class="form_desplegable">
+    {% for field in modifyInnerForm %}
+        {{field.label() }}{{field(value = field.data)}}<br/>
+        <script>
+            id = '{{field.label()}}'.split('"');
+            document.getElementById(id[1]).value = '{{field.data}}'
+        </script>
+    {% endfor %}
+
+    <button type="submit">enviar</button>
+
+</form>

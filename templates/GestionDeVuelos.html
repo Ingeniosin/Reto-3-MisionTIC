@@ -1,7 +1,7 @@
 {% extends "_Layout.html"%}
 {%block contenido%}
 <div class="p-5">
-    <h1> AEROPUERTO PALONEGRO INTERNACIONAL</h1>
+    <h1>GESTION DE VUELOS</h1>
     <h2> PLATAFORMA DE GESTIÓN DE VUELOS </h2>
     <p><strong>Señor Usuario:</strong> A continuación usted podra realizar la gestión de vuelos
         que aterrizan o despegan
@@ -69,93 +69,21 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="form_desplegable">
-                        {{createForm.hidden_tag()}}
-                        {{createForm.origen(placeholder='Origen')}}
-                        {{createForm.destino(placeholder='Destino')}}
-                        {{createForm.fechaSalida(placeholder='fechaSalida')}}
-                        {{createForm.tiempoVuelo(placeholder='tiempoVuelo')}}
-                        {{createForm.piloto(placeholder='piloto')}}
-                        {{createForm.avion(placeholder='avion')}}
 
-                        <!-- <table border="0" style="width: 100%;">
-                            <tr>
-                                <td>
-                                    <div class="size_label">
-                                        <label for="Código">Código</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;" placeholder="ingrese un codigo"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label">
-                                        <label for="Origen">Origen</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Destino">Destino</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Fecha y hora de salida">Fecha y hora de
-                                            salida</label></div>
-                                </td>
-                                <td> <input type="datetime-local" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Fecha y hora de llegada">Fecha y hora de
-                                            llegada</label>
-                                </td>
-                                <td><input type="datetime-local" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Aerolinea">Aerolinea</label></div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Aeronave">Aeronave</label></div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Piloto">Piloto</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Copiloto">Copiloto</label></div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Comentarios">Comentarios</label></div>
-                                </td>
-                                <td><textarea name="Comentarios" style="width: 100%;">Escriba aqui su texto</textarea>
-                                </td>
-                            </tr>
-                        </table> -->
+                    {% for field, errors in createForm.errors.items() %}
+                        <div class="alert alert-danger">{{ ', '.join(errors) }}</div>
+                    {% endfor %}
 
+                    <form method="post" class="form_desplegable" id="POSTFORM">
+                        {% for field in createForm %}
+                            {{field.label() }}{{field()}}<br/>
+                        {% endfor %}
                     </form>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Crear vuelo</button>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('POSTFORM').submit()">Crear vuelo</button>
                 </div>
             </div>
         </div>
@@ -172,83 +100,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="form_desplegable">
-                        <table border="0" style="width: 100%;">
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Código">Código</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;" placeholder="ingrese un codigo"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Origen">Origen</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Destino">Destino</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Fecha y hora de salida">Fecha y hora de
-                                            salida</label></div>
-                                </td>
-                                <td> <input type="datetime-local" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Fecha y hora de llegada">Fecha y hora de
-                                            llegada</label>
-                                </td>
-                                <td><input type="datetime-local" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Aerolinea">Aerolinea</label></div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Aeronave">Aeronave</label></div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Piloto">Piloto</label>
-                                    </div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Copiloto">Copiloto</label></div>
-                                </td>
-                                <td><input type="text" style="width: 100%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="size_label"><label for="Comentarios">Comentarios</label></div>
-                                </td>
-                                <td><textarea name="Comentarios" style="width: 100%;">Escriba aqui su texto</textarea>
-                                </td>
-                            </tr>
-                        </table>
+                    {% for field, errors in modifyForm.errors.items() %}
+                        <div class="alert alert-danger">{{ ', '.join(errors) }}</div>
+                    {% endfor %}
 
+                    <form action="gestionvuelos/m" method="post" class="form_desplegable" id="PUTFORM">
+                        {% for field in modifyForm %}
+                            {{field.label() }}{{field()}}<br/>
+                        {% endfor %}
                     </form>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Modificar vuelo</button>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('PUTFORM').submit()">Modificar vuelo</button>
                 </div>
             </div>
         </div>
@@ -265,26 +130,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="form_desplegable">
-                        <table border="0" style="width: 100%;">
-                            <tr>
-                                <td><input type="text" style="width: 100%;"
-                                        placeholder="ingrese el código de vuelo a eliminar">
-                                    <div class="size_label"></div>
-                                </td>
-                                <td><label for="Código">Buscar Vuelo</label>
-                </div>
-                </td>
-                </tr>
+                    {% for field, errors in deleteForm.errors.items() %}
+                        <div class="alert alert-danger">{{ ', '.join(errors) }}</div>
+                    {% endfor %}
 
-                </table>
-
-                </form>
-
+                    <form action="gestionvuelos/d" method="post" class="form_desplegable" id="DELETEFORM">
+                        {% for field in deleteForm %}
+                            {{field.label() }}{{field()}}<br/>
+                        {% endfor %}
+                    </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Eliminar vuelo</button>
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('DELETEFORM').submit()">Eliminar vuelo</button>
             </div>
         </div>
     </div>

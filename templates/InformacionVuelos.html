@@ -1,0 +1,120 @@
+{% extends "_Layout.html"%}
+{%block contenido%}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800"></h1>
+    <h2> PLATAFORMA DE GESTIÓN DE VUELOS </h2>
+    <p><strong>Señor Usuario:</strong> A continuación usted podra visualizar los vuelos que aterrizan o despegan
+        desde el Aeropuerto Palonegro Internacional</p>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Resumen de vuelos diario</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Codigo de vuelo</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha de salida</th>
+                            <th>Fecha de llegada</th>
+                            <th>Estado</th>
+                            <th>Calificacion general</th>
+                            <th>Comentarios</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Codigo de vuelo</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha de salida</th>
+                            <th>Fecha de llegada</th>
+                            <th>Estado</th>
+                            <th>Calificacion general</th>
+                            <th>Comentarios</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>ABC1</td>
+                            <td>Bogota</td>
+                            <td>Meta</td>
+                            <td>2021/10/22</td>
+                            <td>2021/10/22</td>
+
+                            <td>RETRASADO </td>
+                            <td> 
+                                <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                <!-- <img src="{{url_for('static' , filename='img/estrellas.png')}}" class="calificacion"
+                                    alt="Logo">
+                                <img src="{{url_for('static' , filename='img/estrellas.png')}}" class="calificacion"
+                                    alt="Logo">
+                                <img src="{{url_for('static' , filename='img/estrellas.png')}}" class="calificacion"
+                                    alt="Logo">
+                                <img src="{{url_for('static' , filename='img/estrellas.png')}}" class="calificacion"
+                                    alt="Logo">
+                                <img src="{{url_for('static' , filename='img/estrellas.png')}}" class="calificacion"
+                                    alt="Logo"> -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BD23</td>
+                            <td>Bogota</td>
+                            <td>Meta</td>
+                            <td>2021/10/22</td>
+                            <td>2021/10/22</td>
+
+                        </tr>
+                        <tr>
+                            <td>BD23</td>
+                            <td>Bogota</td>
+                            <td>Meta</td>
+                            <td>2021/10/22</td>
+                            <td>2021/10/22</td>
+
+                        </tr>
+                        <tr>
+                            <td>BD23</td>
+                            <td>Bogota</td>
+                            <td>Meta</td>
+                            <td>2021/10/22</td>
+                            <td>2021/10/22</td>
+
+                        </tr>
+                        <tr>
+                            <td>BD23</td>
+                            <td>Bogota</td>
+                            <td>Meta</td>
+                            <td>2021/10/22</td>
+                            <td>2021/10/22</td>
+
+                        </tr>
+                        <tr>
+                            <td>BD23</td>
+                            <td>Bogota</td>
+                            <td>Meta</td>
+                            <td>2021/10/22</td>
+                            <td>2021/10/22</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<link rel="stylesheet" href="{{url_for('static' , filename='css/GestionVuelos/Estilos.css')}}">
+{%endblock%}

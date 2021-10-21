@@ -140,5 +140,10 @@ def InfoPiloto():
 def vervuelo():   
     return render_template("VerVuelo.html")
 
+@app.route('/informacionvuelos')
+@login_required
+def informacionvuelos():   
+    return render_template("InformacionVuelos.html")    
+
 def generateRandomCode():
     return str(randrange(1000, 10000))

@@ -32,7 +32,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Aruba", "Costa rica", "Turquia", "Ecuador", "Estados Unidos"],
+    labels: ["Armenia", "Barranquilla", "Bogota", "Bucaramanga", "Cali", "Cucuta", "Cartagena", "Leticia","Medellin", "Pereira", "San Andres", "Santa Marta", "Monteria", "Pasto"],
     datasets: [{
       label: "Viajeros",
       lineTension: 0.3,
@@ -46,7 +46,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [30000, 25000, 23000, 30000, 25000],
+      data: [30000, 25000, 23000, 30000, 25000,30000, 25000, 23000, 30000, 25000,30000, 25000, 23000, 30000],
     }],
   },
   options: {

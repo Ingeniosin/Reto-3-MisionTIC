@@ -1,3 +1,4 @@
+from logging import log
 from src.database.Database import Database
 
 class App(object):
@@ -7,6 +8,11 @@ class App(object):
         self.database = Database("MisionTicDb", "testAccount", "test4ccount", "juancamp.me", 5432)
         self.database.open()
         self.createTables()
+
+    def __new__(cls):
+        if App.__instance__ is None:
+            App.__instance__ = object.__new__(cls)
+        return App.__instance__
 
     def createTables(self):
         from src.model.Entity import Usuario, Rol, Lugar, Avion, Vuelo, UsuarioVuelo, Comentarios
@@ -47,9 +53,13 @@ class App(object):
                 Comentarios.create_table()
         self.defaultRole = Rol.get_or_none(Rol.nombre == "Usuario")
         self.pilotRole = Rol.get_or_none(Rol.nombre == "Piloto") 
-        self.adminRole = Rol.get_or_none(Rol.nombre == "Administrador")    
+        self.adminRole = Rol.get_or_none(Rol.nombre == "Administrador")   
+        self.lugares = [t for t in list(Lugar.select())] 
+        self.aviones = [t for t in list(Avion.select())] 
+        self.pilotos = [t for t in list(Usuario.select().where(Usuario.role == self.pilotRole))]
+        print("Loaded...")
 
-    def __new__(cls):
-        if App.__instance__ is None:
-            App.__instance__ = object.__new__(cls)
-        return App.__instance__
+
+    def getVuelos(self):
+        from src.model.Entity import Vuelo
+        return [t for t in list(Vuelo.select())]

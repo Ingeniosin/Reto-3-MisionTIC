@@ -91,6 +91,16 @@
         menu.classList.add(isExpanded ? 'hideMenu' : 'showMenu');
     });
 </script>
+{% if session["prompt"] != None and session["prompt"] != "" %}
+<script>
+         alert("{{session["prompt"]}}".replaceAll("|", "\n"))
+</script>
+
+
+{% do session.update({'prompt': None}) %}
+
+{% endif %}
+
 <style>
     span, i {
         color: black;

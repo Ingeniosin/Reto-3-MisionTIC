@@ -1,16 +1,55 @@
-{% for field, errors in modifyInnerForm.errors.items() %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+
+{% for field, errors in form.errors.items() %}
     <div class="alert alert-danger">{{ ', '.join(errors) }}</div>
 {% endfor %}
 
-<form action="../gestionvuelos/ms" method="post" class="form_desplegable">
-    {% for field in modifyInnerForm %}
-        {{field.label() }}{{field(value = field.data)}}<br/>
+<form action="../api/gestionvuelos" method="put" class="form_desplegable px-3" id="editFormPartial" onsubmit="onSend(event)">
+    {% for field in form %}
+        {% if ( "\"csrf" in field.label().lower() or "\"id" in field.label().lower()) %}
+            {{field(value = field.data)}}
+            {% continue %}
+        {% endif %}
+        {{field.label()}}{{field(value = field.data, class_='form-control')}}
         <script>
             id = '{{field.label()}}'.split('"');
             document.getElementById(id[1]).value = '{{field.data}}'
         </script>
     {% endfor %}
-
-    <button type="submit">enviar</button>
-
+    <br>
+    <button class="btn btn-success w-100" onclick="onSend()">Editar</button>
 </form>
+
+<script>
+    const onSend = (e) => {
+        if(e != null) {
+            e.preventDefault()
+            e.stopPropagation();
+        }
+        form = document.getElementById("editFormPartial");
+        loading = document.getElementById("editLoadingInPartial");
+        form.style.display = "none"
+        loading.style.display = "flex"
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", "api/gestionvuelos"); 
+        xhr.onload = function(event){ 
+            loading.style.display = 'none';
+            form.style.display = 'block';
+        }; 
+        xhr.send(new FormData(form));
+    } 
+</script>
+
+<div id="editLoadingInPartial" class="w-100 flex-row align-items-center justify-content-center" style="display: none;">
+    <div class="d-flex flex-column align-items-center">
+        <img src="{{url_for('static' , filename='img/loading.svg')}}">
+        <p>Cargando...</p>
+    </div>                        
+</div>

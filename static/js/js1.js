@@ -32,13 +32,13 @@ var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["Precio", "Servicio al cliente", "Puntualidad", "Gestion de reclamaciones", "Calidad"],
+    labels: ciudades,
     datasets: [{
       label: "Puntuacion",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: [4.5,4.8,4.2,4.6,4.9,4.3],
+      data: calificaciones,
     }],
   },
   options: {
@@ -59,9 +59,6 @@ var myBarChart = new Chart(ctx, {
         gridLines: {
           display: false,
           drawBorder: false
-        },
-        ticks: {
-          maxTicksLimit: 6
         },
         maxBarThickness: 25,
       }],

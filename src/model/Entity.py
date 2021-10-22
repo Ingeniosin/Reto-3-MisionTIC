@@ -1,6 +1,6 @@
 from peewee import BooleanField, ForeignKeyField, Model, CharField, DateTimeField, IntegerField, DoubleField
-import datetime
 from flask_login import UserMixin
+import datetime
 
 class EntityModel(Model):
     class Meta:
@@ -39,7 +39,7 @@ class Vuelo(EntityModel):
 
 class UsuarioVuelo(EntityModel):
     usuario = ForeignKeyField(Usuario)
-    vuelo = ForeignKeyField(Vuelo)
+    vuelo = ForeignKeyField(Vuelo, on_delete='cascade')
 
 class Comentarios(EntityModel):
     descripcion = CharField()
@@ -47,4 +47,4 @@ class Comentarios(EntityModel):
     fecha_creacion = DateTimeField(default = datetime.datetime.now)
     fecha_modificacion = DateTimeField(default = datetime.datetime.now)
     usuario  = ForeignKeyField(Usuario)
-    vuelo = ForeignKeyField(Vuelo)
+    vuelo = ForeignKeyField(Vuelo, on_delete='cascade')

@@ -40,8 +40,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <img src="{{url_for('static' , filename='img/colombia.gif')}}" class="card-img-top-b"
-                    alt="Mapa">
+                                    <img src="{{url_for('static' , filename='img/colombia.gif')}}" class="card-img-top-b"alt="Mapa">
                                 </div>
                                 <hr>
 
@@ -53,7 +52,7 @@
                             </div>
                             <div class="card-body">
                                <p>Conoce nuestros viajes y reserva ahora </p>
-                               <button type="button" class="btn btn-primary" style="background-color: #3a51bf;" data-toggle="modal"
+                               <button type="button" onclick="window.location.href = '/informacionvuelos'" class="btn btn-primary" style="background-color: #3a51bf;" data-toggle="modal"
                                data-target="#BotonModificar"> Reserva ahora </button>
                                 <hr>
                             </div>
@@ -61,23 +60,18 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
-
-
     </div>
-
-
 </div>
-
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
 <script type="text/JavaScript" src="{{url_for('static' , filename='vendor/chart.js/Chart.min.js')}}"></script>
+<script>
+    ciudades = {{ciudades}}
+    cantidadDestinos = {{cantidadDestinos}}
+    calificaciones = {{calificaciones}}
+</script>
 <script type="text/JavaScript" src="{{url_for('static' , filename='js/js.js')}}"></script>
 <script type="text/JavaScript" src="{{url_for('static' , filename='js/js1.js')}}"></script>
 {%endblock%}

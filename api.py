@@ -16,8 +16,6 @@ app.jinja_env.add_extension('jinja2.ext.do')
 from src.model.Input import *
 from src.model.Entity import *
 
-vuelos = []
-
 def getApp():
     return Application.__instance__
 
@@ -86,7 +84,7 @@ def GestionVuelosApi():
         form = GestionCrearVuelo(request.form)        
         codigo = generateRandomCode()
         Vuelo.create(codigo = codigo,  origen = form.origen.data,  destino = form.destino.data,estado = "Disponible",capacidad = form.capacidad.data,avion = form.avion.data,fecha_salida = form.fechaSalida.data,fecha_llegada = form.fechaSalida.data + timedelta(minutes = int(form.tiempoVuelo.data)),piloto = form.piloto.data).save()
-        return ok({"msg": "El vuelo fue generado correctamente! | | El codigo es: "+codigo, "data": {"codigo": codigo, "id": Vuelo.get(Vuelo.codigo == codigo).id}})
+        return ok("El vuelo fue generado correctamente! | | * El codigo es: "+codigo)
     elif request.method == "PUT":
         form = GestionCrearVuelo(request.form)        
         vuelo: Vuelo = Vuelo.select().where(Vuelo.id == int(form.id.data)).get()
@@ -99,14 +97,13 @@ def GestionVuelosApi():
         vuelo.save()
         return render_template("EditarVueloPartial.html", form = GestionCrearVuelo().fill(vuelo))
     elif request.method == "DELETE":
-        form = GestionEliminarVuelo(request.form)
-        Vuelo.delete_by_id(form.vueloId.data)
+        Vuelo.delete_by_id(request.form.get("vueloId"))
         return ok()
     elif request.method == "GET":
         vueloId = request.args.get('vueloId')
         if vueloId is not None:
             return render_template("EditarVueloPartial.html", form = GestionCrearVuelo().fill(Vuelo.get_by_id(vueloId)))
-        return ok(list(map(lambda x: (x.id, x.nombre),  getApp().aviones)))
+        return ok(list(map(lambda x: [x.id, x.codigo],  getApp().getVuelos())))
     
 
 @app.route('/gestionvuelos', methods=["GET"])
@@ -114,7 +111,7 @@ def GestionVuelosApi():
 def GestionVuelos():
     if current_user.role.id != 3:
         return redirect("/")    
-    return render_template("GestionDeVuelos.html", createForm = GestionCrearVuelo(), deleteForm = GestionEliminarVuelo(), modifyForm = GestionModificarVuelo())
+    return render_template("GestionDeVuelos.html", createForm = GestionCrearVuelo())
 
 @app.route('/infopiloto')
 @login_required
@@ -151,8 +148,8 @@ def getCantidadPasajerosByLugar(lugar: Lugar, usuarioVuelos):
 def generateRandomCode():
     return str(randrange(1000, 10000))
 
-def error(msg):
+def error(msg = ""):
     return json.dumps(msg), 400, {'ContentType':'application/json'}
 
-def ok(msg):
+def ok(msg = ""):
     return json.dumps(msg), 200, {'ContentType':'application/json'}

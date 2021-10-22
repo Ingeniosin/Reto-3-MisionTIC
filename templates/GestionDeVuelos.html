@@ -72,41 +72,25 @@
                                 {{field(value = field.data)}}
                                 {% continue %}
                             {% endif %}
-                            {{field.label()}}{{field(value = field.data, class_='form-control')}}
-                           
+                            {{field.label()}}{{field(value = field.data, class_='form-control')}}                           
                         {% endfor %}
                     </form>
-
                     <script>
-                        const onCreate = (e) => {
-                                if(e != null) {
-                                    e.preventDefault()
-                                    e.stopPropagation();
-                                }
+                        const onCreate = () => {
                                 var loading = document.getElementById("createLoading")
                                 var form = document.getElementById("POSTFORM")
                                 loading.style.display = 'flex';
                                 form.style.display = 'none';
                                 var xhr = new XMLHttpRequest();
                                 xhr.open("POST", "/api/gestionvuelos"); 
-                                xhr.onload = function(event){ 
-                                    loading.style.display = 'none';
-                                    form.style.display = 'block';
-                                    response = JSON.parse(event.target.response)
-                                    select = document.getElementById("removeSelect")
-                                    editSelect = document.getElementById("editSelect")
-                                    option = () => {
-                                        var option = document.createElement("option");
-                                        option.text = response.data.codigo
-                                        option.value = response.data.id
-                                        return option;
-                                    }
-                                    select.add(option())
-                                    editSelect.add(option())
-                                    alert(response.msg.replaceAll("|", "\n").replaceAll("\"", ""))
+                                xhr.onload = (event) => {
+                                    updateSelections(() => {
+                                        alert(event.target.response.replaceAll("|", "\n").replaceAll("\"", ""))
+                                        loading.style.display = 'none';
+                                        form.style.display = 'block';
+                                    })                                    
                                 }; 
-                                var formData = new FormData(form); 
-                                xhr.send(formData);
+                                xhr.send(new FormData(form));
                         }
                     </script>
                         <div id="createLoading" class="w-100 flex-row align-items-center justify-content-center" style="display: none;">
@@ -136,16 +120,8 @@
                 </div>
                 <div class="modal-body">
                     <form  class="form_desplegable" id="PUTFORM">
-                        {% for field in modifyForm %}
-                            {% if ( "\"csrf" in field.label().lower() or "\"id" in field.label().lower()) %}
-                                {{field(value = field.data)}}
-                                {% continue %}
-                            {% endif %}
-                            {{field.label()}}{{field(value = field.data, class_='form-control', id='editSelect', onchange="onEditChange()")}}
-                            <script>
-                                document.getElementById("editSelect").value = '{{field.data}}'
-                            </script>
-                        {% endfor %}
+                        <label for="vueloId">Vuelo a modificar</label>
+                        <select class="form-control" id="editSelect" name="vueloId" onchange="onEditChange()" value="None"></select>
                     </form>
 
                     <script>
@@ -156,7 +132,7 @@
                             loading.style.display = 'flex';
                             var xhr = new XMLHttpRequest();
                             xhr.open("GET", "api/gestionvuelos?"+new URLSearchParams(new FormData(document.getElementById("PUTFORM"))).toString()); 
-                            xhr.onload = function(event){ 
+                            xhr.onload = (event) => { 
                                 iframe.contentWindow.document.open();
                                 iframe.contentWindow.document.write(event.target.response);
                                 iframe.contentWindow.document.close();
@@ -193,62 +169,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {% for field, errors in deleteForm.errors.items() %}
-                        <div class="alert alert-danger">{{ ', '.join(errors) }}</div>
-                    {% endfor %}
-                    <form  class="form_desplegable" id="DELETEFORM" onsubmit="onSend(event)">
-                        {% for field in deleteForm %}
-                            {% if ( "\"csrf" in field.label().lower() or "\"id" in field.label().lower()) %}
-                                {{field(value = field.data)}}
-                                {% continue %}
-                            {% endif %}
-                            {{field.label()}}{{field(value = field.data, class_='form-control', id='removeSelect')}}
-                            <script>
-                                document.getElementById("removeSelect").value = '{{field.data}}'
-                            </script>
-                        {% endfor %}
+                    <form  class="form_desplegable" id="DELETEFORM">
+                        <label for="vueloId">Vuelo a modificar</label>
+                        <select class="form-control" id="removeSelect" name="vueloId" value="None"></select>
                     </form>
-
                     <script>
-                        const onSend = (e) => {
-                            if(e != null) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                            }
-                            loading = document.getElementById("deleteLoading")
-                            select = document.getElementById("removeSelect")
+                        const onSend = () => {
+                            var loading = document.getElementById("deleteLoading")
+                            var select = document.getElementById("removeSelect")
                             if(!select.value) {
                                 alert("Valor invalido")
                                 return
                             }
-                            editSelect = document.getElementById("editSelect")
-                            value = select.value
                             loading.style.display = 'flex';
                             var xhr = new XMLHttpRequest();
                             xhr.open("DELETE", "/api/gestionvuelos"); 
-                            xhr.onload = function(event){ 
-                                for (var i=0; i<select.length; i++) {
-                                    if (select.options[i].value == value) {
-                                        select.remove(i);
-                                        break;
-                                    }                                            
-                                }
-                                for (var i=0; i<editSelect.length; i++) {
-                                    if (editSelect.options[i].value == value) {
-                                        editSelect.remove(i);
-                                        break;
-                                    }                                            
-                                }
-                                iframe = document.getElementById("fameEditar")
-                                iframe.style.display = 'none';
-                                loading.style.display = 'none';
+                            xhr.onload = (event) => {
+                                updateSelections(() => {
+                                    loading.style.display = 'none';
+                                })                            
                             }; 
                             var formData = new FormData(document.getElementById("DELETEFORM")); 
                             xhr.send(formData);
                         }
-
                     </script>
-
                     <div id="deleteLoading" class="w-100 flex-row align-items-center justify-content-center" style="display: none;">
                         <div class="d-flex flex-column align-items-center">
                             <img src="{{url_for('static' , filename='img/loading.svg')}}">
@@ -264,6 +208,40 @@
         </div>
     </div>
 </div>
+
+<script>
+    const updateSelections = (onLoad = () => {}) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/api/gestionvuelos"); 
+        xhr.onload = (event) => { 
+            response = JSON.parse(event.target.response)
+            reset = (input) => {
+                input.value = null
+                input.innerHTML = "";             
+            }    
+            var removeSelect = document.getElementById("removeSelect")
+            var editSelect = document.getElementById("editSelect")
+            reset(editSelect)
+            reset(removeSelect)
+            response.forEach(x => {
+                option = () => {
+                        var option = document.createElement("option");
+                        option.text = x[1]
+                        option.value = x[0]
+                        return option;
+                }
+                removeSelect.add(option())
+                editSelect.add(option())     
+            })
+            document.getElementById("fameEditar").style.display = 'none'; 
+            removeSelect.value = null
+            editSelect.value = null
+            onLoad()
+        }; 
+        xhr.send();
+    }
+    updateSelections()
+</script>
 
 <link rel="stylesheet" href="{{url_for('static' , filename='css/GestionVuelos/Estilos.css')}}">
 {%endblock%}

@@ -6,6 +6,8 @@ from wtforms.fields.simple import HiddenField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError
 from wtforms.fields.html5 import DateTimeLocalField
 from wtforms.widgets.html5 import NumberInput
+from datetime import datetime
+
 
 def getApp():
     import app
@@ -44,13 +46,13 @@ class LoginForm(FlaskForm):
 
 class GestionCrearVuelo(FlaskForm):
     id = HiddenField()
-    origen = SelectField(u'Origen', choices=list(map(lambda x: (x.id, x.nombre), getApp().lugares)))
-    destino = SelectField(u'Destino', choices=list(map(lambda x: (x.id, x.nombre), getApp().lugares)))
-    fechaSalida = DateTimeLocalField('Fecha salida', format='%Y-%m-%dT%H:%M')
-    tiempoVuelo = IntegerField("Tiempo de vuelo (Minutos)", widget=NumberInput(), default = 0)
-    piloto = SelectField(u'Piloto', choices=list(map(lambda x: (x.id, x.nombre),  getApp().pilotos)))
-    avion = SelectField(u'Avion', choices=list(map(lambda x: (x.id, x.nombre),  getApp().aviones)))
-    capacidad = IntegerField('Capacidad maxima pasajeros', widget=NumberInput(), default = 0)
+    origen = SelectField(u'Origen', choices= getApp().lugaresTouple)
+    destino = SelectField(u'Destino', choices= getApp().lugaresTouple)
+    fechaSalida = DateTimeLocalField('Fecha salida', format='%Y-%m-%dT%H:%M', default = datetime.now().strftime('%Y-%m-%dT%H:%M'))
+    tiempoVuelo = IntegerField("Tiempo de vuelo (Minutos)", widget=NumberInput(), default = 45)
+    piloto = SelectField(u'Piloto', choices=getApp().pilotosTouple)
+    avion = SelectField(u'Avion', choices=getApp().avionesTouple)
+    capacidad = IntegerField('Capacidad maxima pasajeros', widget=NumberInput(), default = 120)
 
     def fill(self, vuelo):
         if vuelo is None:
@@ -64,19 +66,3 @@ class GestionCrearVuelo(FlaskForm):
         self.capacidad.data  = vuelo.capacidad
         self.avion.data  = vuelo.avion
         return self
-
-class GestionEliminarVuelo(FlaskForm):
-    vueloId = SelectField(u'Vuelo a eliminar')
-
-    def __init__(self, *args, **kwargs):
-            super(GestionEliminarVuelo, self).__init__(*args, **kwargs)
-            self.vueloId.choices=list(map(lambda x: (x.id, x.codigo),  getApp().getVuelos()))
-            self.vueloId.data = None
-
-class GestionModificarVuelo(FlaskForm):
-    vueloId = SelectField(u'Vuelo a modificar', choices=list(map(lambda x: (x.id, x.codigo),  getApp().getVuelos())))
-
-    def __init__(self, *args, **kwargs):
-            super(GestionModificarVuelo, self).__init__(*args, **kwargs)
-            self.vueloId.choices=list(map(lambda x: (x.id, x.codigo),  getApp().getVuelos()))
-            self.vueloId.data = None

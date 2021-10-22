@@ -54,9 +54,12 @@ class App(object):
         self.defaultRole = Rol.get_or_none(Rol.nombre == "Usuario")
         self.pilotRole = Rol.get_or_none(Rol.nombre == "Piloto") 
         self.adminRole = Rol.get_or_none(Rol.nombre == "Administrador")   
-        self.lugares = [t for t in list(Lugar.select())] 
+        self.lugares = [t for t in list(Lugar.select())]
+        self.lugaresTouple = list(map(lambda x: (x.id, x.nombre), self.lugares))
         self.aviones = [t for t in list(Avion.select())] 
+        self.avionesTouple = list(map(lambda x: (x.id, x.nombre), self.aviones))
         self.pilotos = [t for t in list(Usuario.select().where(Usuario.role == self.pilotRole))]
+        self.pilotosTouple = list(map(lambda x: (x.id, x.nombre), self.pilotos))
         print("Loaded...")
 
 

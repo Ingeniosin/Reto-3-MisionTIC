@@ -3,31 +3,28 @@
 <div id="wrapper">
     <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container-fluid mt-4">
+                <div class="row d-flex align-items-center justify-items-center flex-column">
                     <div class="col-xl-8 col-lg-7">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Ver información vuelos</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Ver vuelo</h6>
                             </div>
                             <div class="card-body">
                                 <div class="modal-body">
-                                    <center>
-                                        <input type="text" style="width: 100%;" readonly
-                                            placeholder="Ingrese su número de vuelo aqui">
-                                        <br>
-                                        <div>
-                                            <br>
-                                            <button type="button" class="btn btn-primary">Buscar</button>
-                                        </div>
-                                    </center>
                                     <div>
                                         <form action="" class="form_desplegable">
                                             <div class="row">
                                                 <div class="col-4">
-                                                    <img class="img_center"
-                                                        src="{{url_for('static', filename='img/avion.jpeg')}}"
-                                                        style="width: 80%;">
+                                                    <div class="row">
+                                                        <img class="img_center"
+                                                            src="{{vuelo.avion.foto}}"
+                                                            style="width: 80%;">
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <h6>Nombre: {{vuelo.avion.nombre}}</h6>
+                                                        <h6>Capacidad: {{vuelo.avion.capacidad}}</h6>
+                                                    </div>
                                                 </div>
                                                 <div class="col-8">
                                                     <table border="0" style="width: 100%;">
@@ -37,7 +34,7 @@
                                                                 <div class="size_label"><label for="vuelo">Vuelo</label>
                                                                 </div>
                                                             </td>
-                                                            <td><input type="text" style="width: 100%;"></td>
+                                                            <td><input type="text" style="width: 100%;" value="{{vuelo.codigo}}" readonly></td>
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -45,7 +42,7 @@
                                                                         for="Origen">Origen</label>
                                                                 </div>
                                                             </td>
-                                                            <td><input type="text" style="width: 100%;"></td>
+                                                            <td><input type="text" style="width: 100%;" value="{{vuelo.origen.nombre}}" readonly></td>
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -53,47 +50,39 @@
                                                                         for="Destino">Destino</label>
                                                                 </div>
                                                             </td>
-                                                            <td><input type="text" style="width: 100%;"></td>
+                                                            <td><input type="text" style="width: 100%;" value="{{vuelo.destino.nombre}}" readonly></td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <div class="size_label"><label
-                                                                        for="Salida/Departure">Salida/Departure</label>
+                                                                        for="Salida">Salida/Departure</label>
                                                                 </div>
                                                             </td>
-                                                            <td><input type="text" style="width: 100%;" readonly></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="size_label"><label for="En Sala/ At Gate">En
-                                                                        Sala/ At Gate</label>
-                                                                </div>
-                                                            </td>
-                                                            <td><input type="text" style="width: 100%;"></td>
+                                                            <td><input type="text" style="width: 100%;" value="{{vuelo.fecha_salida}}" readonly></td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <div class="size_label"><label
-                                                                        for="Aerolinea">Aerolinea</label>
+                                                                        for="LLegada">LLegada</label>
                                                                 </div>
                                                             </td>
-                                                            <td><input type="text" style="width: 100%;"></td>
+                                                            <td><input type="text" style="width: 100%;" value="{{vuelo.fecha_llegada}}" readonly></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="size_label"><label
-                                                                        for="Asiento/Seat">Asiento/Seat</label>
-                                                                </div>
-                                                            </td>
-                                                            <td><input type="text" style="width: 100%;"></td>
-                                                        </tr>
-                                                        <tr>
+                                                    <tr>
                                                             <td>
                                                                 <div class="size_label"><label
                                                                         for="Estado">Estado</label>
                                                                 </div>
                                                             </td>
-                                                            <td><input type="text" style="width: 100%;"></td>
+                                                            <td><input type="text" style="width: 100%;" value="{{vuelo.estado}}"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="size_label"><label
+                                                                        for="Piloto">Piloto</label>
+                                                                </div>
+                                                            </td>
+                                                            <td><input type="text" style="width: 100%;" value="{{vuelo.piloto.nombre}}"></td>
                                                         </tr>
                                                     </table>
                                                 </div>
@@ -104,29 +93,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary"></h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="modal-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus qui ipsum totam architecto, inventore nostrum, delectus possimus harum consequatur, sit nisi quibusdam iure? Porro molestias, quo doloremque aut dolore laboriosam?</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary"></h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Comentarios</h6>
                             </div>
                             <div class="card-body">
                                 <div class="modal-body">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis dolores omnis ipsa voluptate sequi, eos aspernatur laboriosam rerum nemo fugiat optio magni, nisi, saepe obcaecati quia necessitatibus corporis laborum iste!/p>
+                                    <p>Aqui podras escribir tu reseña sobre tu experiencia en los aires!</p>
                                 </div>
                             </div>
                         </div>

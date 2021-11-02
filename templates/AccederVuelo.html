@@ -1,0 +1,48 @@
+{% extends "_Layout.html"%}
+
+
+
+{%block contenido%}
+
+<link rel="stylesheet" href="{{url_for('static' , filename='css/Auth.css')}}">
+<div id="authContainer" class="w-100 h-100" style="display: flex;align-items: center;justify-content: center;position: absolute;background-image: url(&quot;&quot;);background-size: cover;background-position: center center;">
+    <div class="bg-white p-4 rounded rounded-lg-0 my-5 my-lg-0 animated--grow-in shadow" style="width: 420px;">
+        <div class="m-auto w-lg-75 w-xl-50">
+            <img src="{{url_for('static' , filename='img/Logo.png')}}" style="margin-bottom: 30px;width: 70px;margin-bottom: -5px;">
+            <p class="lead text-center text-gray-900" style="font-weight: bold;">Acceder al vuelo</p>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <p>¿Ya reservaste un vuelo?, con tu codigo de reserva puedes revisarlo!.</p>
+            {% for field, errors in form.errors.items() %}
+                <div class="alert alert-danger">{{ ', '.join(errors) }}</div>
+            {% endfor %}
+            <form method="post" id="authForm" class="needs-validation">            
+                {{form.hidden_tag()}}
+                {{form.codigo_reserva(size=30, class_='form-control form-control-user', placeholder='Codigo de reserva')}}
+                <div class="w-100 d-flex justify-content-between px-3">
+                    <a id="submitBtn" class="btn btn-success btn-icon-split">
+                        <span class="icon">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="text text-white">Ver vuelo</span>
+                    </a>
+                </div>           
+            </form>            
+            <p class="mt-3"><a class="text-info small" href="#">¿Algún problema?</a></p>
+        </div>
+    </div>
+</div>
+
+<script src="{{url_for('static' , filename='js/FormValidation.js')}}"></script>
+<script>
+
+    var authContainer = document.getElementById("authContainer"), submitBtn = document.getElementById("submitBtn"), authForm = document.getElementById("authForm")
+
+
+    submitBtn.addEventListener('click', () => {
+        if(checkForm(authForm))  
+            authForm.submit()
+    });
+
+</script>
+
+{%endblock%}

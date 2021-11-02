@@ -4,79 +4,38 @@
     <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row flex-column align-items-center justify-items-center">
                     <div class="col-xl-8 col-lg-7">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Mi información</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="modal-body">
-                                        <center>
-                                            <img class="img-profile rounded-circle" src="{{url_for('static' , filename='img/user.png')}}" style="width: 80px;">
-                                        </center>
-                                        
-                                        <form action="" class="form_desplegable">
+                                    <div class="modal-body d-flex flex-column align-items-center justify-items-center">
+                                        <img class="img-profile rounded-circle" src="{{url_for('static' , filename='img/user.png')}}" style="width: 80px;">  
+                                        <form action="" class="form_desplegable mt-4 w-75">
                                             
-                                            <table border="0" style="width: 100%;">
+                                            <table style="width: 100%;">
                                                 <tr>
                                                     <td>
-                                                        <div class="size_label"><label for="Nombre">Nombre</label>
+                                                        <div class="size_label"><label for="Nombre">Nombre completo</label>
                                                         </div>
                                                     </td>
                                                     <td><input type="text" style="width: 100%;" readonly
-                                                            value={{current_user.name}}></td>
+                                                            value={{usuario.nombre}} aria-readonly="true" readonly></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="size_label"><label for="Apellido">Apellido</label>
-                                                        </div>
-                                                    </td>
-                                                    <td><input type="text" style="width: 100%;" readonly></td>
-                                                </tr>
+
                                                 <tr>
                                                     <td>
                                                         <div class="size_label"><label for="Email">Email</label>
                                                         </div>
                                                     </td>
                                                     <td><input type="text" style="width: 100%;" readonly
-                                                        value={{current_user.email}}></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="size_label"><label for="Cargo">Cargo</label>
-                                                        </div>
-                                                    </td>
-                                                    <td><input type="text" style="width: 100%;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="size_label"><label for="Aerolinea">Aerolinea</label>
-                                                        </div>
-                                                    </td>
-                                                    <td><input type="text" style="width: 100%;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="size_label"><label for="Dirección">Dirección</label>
-                                                        </div>
-                                                    </td>
-                                                    <td><input type="text" style="width: 100%;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="size_label"><label for="Teléono">Teléfono</label>
-                                                        </div>
-                                                    </td>
-                                                    <td><input type="text" style="width: 100%;"></td>
+                                                        value={{usuario.correo}} aria-readonly="true" readonly></td>
                                                 </tr>
                                             </table>
                                         </form>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary">Guardar Información</button>
                                 </div>
                             </div>
                             </div>

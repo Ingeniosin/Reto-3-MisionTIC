@@ -52,7 +52,7 @@
                         <span> Informacion de vuelos</span></a>
                 </div>
                 <div class="nav-item">
-                    <a class="nav-link" href="/vervuelo">
+                    <a class="nav-link" href="/accedervuelo">
                         <i class="fas fa-fighter-jet"></i>
                         <span> Acceder a vuelo</span></a>
                 </div>
@@ -93,7 +93,9 @@
 </script>
 {% if session["prompt"] != None and session["prompt"] != "" %}
 <script>
+    if("{{session["prompt"]}}".trim() != ""){
          alert("{{session["prompt"]}}".replaceAll("|", "\n"))
+    }
 </script>
 
 

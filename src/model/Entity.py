@@ -40,6 +40,7 @@ class Vuelo(EntityModel):
 class UsuarioVuelo(EntityModel):
     usuario = ForeignKeyField(Usuario)
     vuelo = ForeignKeyField(Vuelo, on_delete='cascade')
+    codigo_reserva = CharField()
 
 class Comentarios(EntityModel):
     descripcion = CharField()

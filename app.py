@@ -23,6 +23,8 @@ class App(object):
             Rol.create(nombre = "Administrador").save()
         if not Usuario.table_exists():
                 Usuario.create_table()
+                Usuario.create(nombre = "Andres Castillo", correo = "ac@gmail.com", contrasena = "test", role = Rol.get(Rol.nombre == "Piloto")).save()
+                Usuario.create(nombre = "Juan Campiño", correo = "jcampinotoro@gmail.com", contrasena = "1234", role = Rol.get(Rol.nombre == "Administrador")).save()
         if not Lugar.table_exists():
                 Lugar.create_table()
                 lugares = [
@@ -45,6 +47,7 @@ class App(object):
                      Lugar.create(**data_dict).save()
         if not Avion.table_exists():
                 Avion.create_table()
+                Avion.create(nombre = "Airbus A320", capacidad = "200", foto = "https://ichef.bbci.co.uk/news/640/cpsprodpb/4792/production/_105322381_airbus_getty.jpg").save()
         if not Vuelo.table_exists():
                 Vuelo.create_table()
         if not UsuarioVuelo.table_exists():

@@ -37,11 +37,14 @@ class LoginForm(FlaskForm):
         self.user = searchUser
 
     def validate_password(self, field):
-        if self.user is None:
-            raise ValidationError("Usuario invalido.")
-        passwordValid = self.user.contrasena == field.data
-        if not passwordValid:
-            raise ValidationError("Las credenciales son invalidas.")
+        try:
+            if self.user is None:
+                raise ValidationError("Usuario invalido.")
+            passwordValid = self.user.contrasena == field.data
+            if not passwordValid:
+                raise ValidationError("Las credenciales son invalidas.")
+        except AttributeError:
+            return
 
 
 class GestionCrearVuelo(FlaskForm):
@@ -66,3 +69,18 @@ class GestionCrearVuelo(FlaskForm):
         self.capacidad.data  = vuelo.capacidad
         self.avion.data  = vuelo.avion
         return self
+
+class AccederVuelo(FlaskForm):
+    codigo_reserva = StringField('Codigo de reserva del vuelo')
+
+    def validate_codigo_reserva(self, field):
+        from src.model.Entity import UsuarioVuelo
+        try:
+            if self.user is None:
+                raise ValidationError("Usuario invalido.")
+            registro = UsuarioVuelo.get_or_none(UsuarioVuelo.codigo_reserva == field.data and UsuarioVuelo.usuario.id == self.user.id)
+            self.vuelo = registro.vuelo
+            if registro is None:
+                raise ValidationError("Codigo de reserva invalido.")
+        except AttributeError:
+            return

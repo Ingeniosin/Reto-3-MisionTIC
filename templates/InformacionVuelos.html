@@ -48,8 +48,11 @@
                                 {% endif %}
                             </td>
                             <td> 
-                                {% if vuelo.estado == "Disponible" %}
-                                    <button>Reservar vuelo</button>
+                                {% if vuelo.codigo_reserva != "" %}
+                                    <button onclick="verVuelo(this, '{{vuelo.codigo_reserva}}')">Ver vuelo</button>
+                           
+                                {% elif vuelo.estado == "Disponible"%}
+                                    <button onclick="reservarVuelo(this, {{vuelo.id}})">Reservar vuelo</button>
                                 {% endif %}
                             </td>
                         </tr>
@@ -59,10 +62,64 @@
             </div>
         </div>
     </div>
-
 </div>
 
-
-
 <link rel="stylesheet" href="{{url_for('static' , filename='css/GestionVuelos/Estilos.css')}}">
+
+<script>
+
+    var boton;
+
+    const reservarVuelo = (button, idVuelo) => {
+        const url = "/reservarvuelo";
+        const data = {
+            idVuelo: idVuelo
+        }
+        boton = button
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.status == 200) {
+                response.json().then(data => {
+                    button.setAttribute("onclick", "verVuelo(this, \"" + data + "\")");
+                    button.textContent = "Ver vuelo"
+                    alert("Vuelo reservado con exito el codigo es: "+data);
+                });
+                
+            } else {
+                alert("Error al reservar vuelo");
+            }
+        });
+    }
+
+    const verVuelo = (button, codReserva) => {
+        const url = "/accedervuelo";
+        const data = {
+            codReserva: codReserva
+        }
+        boton = button
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow'
+        }).then(response => {
+            if (response.status == 200) {
+                alert("Vuelo encontrado!");
+            } else {
+                alert("Vuelo no encontrado!");
+            }
+            return response.text()
+        }).then(html => {
+            document.body.innerHTML = html 
+        });
+    }
+</script>
+
 {%endblock%}

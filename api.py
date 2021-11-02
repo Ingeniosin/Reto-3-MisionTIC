@@ -1,9 +1,11 @@
+from html.entities import codepoint2name
 from random import randrange
 from flask import Flask, render_template, request, Markup, session, json
 from flask_login import (LoginManager, current_user, login_required, login_user, logout_user)
 from werkzeug.utils import redirect
 from datetime import timedelta
 from app import App as Application
+import random
 
 Application()
 app = Flask(__name__)
@@ -62,7 +64,7 @@ def logout():
 @app.route('/miinformacion', methods=["GET", "POST"])
 @login_required
 def MiInformacion():
-    return render_template("InformacionPiloto.html")
+    return render_template("InformacionPiloto.html", usuario = current_user)
 
 @app.route('/')
 @app.route('/dashboard')
@@ -118,6 +120,45 @@ def GestionVuelos():
 def InfoPiloto():    
     return render_template("InformacionPiloto.html")
 
+@app.route('/reservarvuelo', methods=["POST"])
+@login_required
+def reservarvuelo():
+    idVuelo = request.json["idVuelo"]
+    print(idVuelo)
+    vuelo = Vuelo.get_by_id(idVuelo)
+    if vuelo.estado == "Disponible":
+        codigoReserva = randomString(5)
+        UsuarioVuelo.create(usuario = current_user, vuelo = vuelo, codigo_reserva = codigoReserva).save()
+        vuelo.save()
+        return ok(codigoReserva)
+    return error("El vuelo no esta disponible")
+
+
+
+@app.route('/accedervuelo', methods=["GET", "POST"])
+@login_required
+def accedervuelo():   
+    isPost = request.method == "POST"
+    if not isPost:
+        return render_template("AccederVuelo.html", form=AccederVuelo())
+    codReserva = None
+    try:
+        codReserva = request.json["codReserva"]
+    except Exception as e:
+        pass
+    existsRevserva =  (codReserva is not None and codReserva != "")
+    form = AccederVuelo(request.form if isPost and not existsRevserva else None)
+    if isPost:
+        if existsRevserva:
+            reserva = UsuarioVuelo.select().where(UsuarioVuelo.codigo_reserva == codReserva).get()
+            vuelo = Vuelo.get_by_id(reserva.vuelo.id)
+            return render_template("VerVuelo.html", vuelo = vuelo)
+        isValid = form.validate_on_submit()
+        if isValid:
+            reserva = UsuarioVuelo.select().where(UsuarioVuelo.codigo_reserva == form.codigo_reserva.data).get()
+            vuelo = Vuelo.get_by_id(reserva.vuelo.id)
+            return render_template("VerVuelo.html", vuelo = vuelo)
+
 @app.route('/vervuelo')
 @login_required
 def vervuelo():   
@@ -125,10 +166,13 @@ def vervuelo():
 
 @app.route('/informacionvuelos')
 @login_required
-def informacionvuelos():   
+def informacionvuelos():
+    usuarioVuelo = [t for t in list(UsuarioVuelo.select().where(UsuarioVuelo.usuario == current_user))]
     vuelos = [t for t in list(Vuelo.select())]
     comentarios = [t for t in list(Comentarios.select())]
     for vuelo in vuelos:
+        reserva = list(filter(lambda x: x.vuelo.id == vuelo.id, usuarioVuelo))
+        vuelo.codigo_reserva = "" if not len(reserva) > 0  else reserva[0].codigo_reserva
         vuelo.calificacion = getCalificacionByVuelo(vuelo, comentarios)
     return render_template("InformacionVuelos.html", vuelos = vuelos)    
 
@@ -153,3 +197,11 @@ def error(msg = ""):
 
 def ok(msg = ""):
     return json.dumps(msg), 200, {'ContentType':'application/json'}
+
+def randomString(length):  
+    sample_string = 'pqrstuvwxy'
+    result = ''.join((random.choice(sample_string)) for x in range(length))  
+    return result
+
+if __name__ == '__main__':
+    app.run(debug=True)
